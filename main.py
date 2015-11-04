@@ -164,10 +164,10 @@ def get_train_test_index(target=None, exp=None):
     :param exp: the experiment object used to split trials by user.
     :return: a generator that produces training and testing trial indices.
     """
-    if SPLIT_BY_TRIAL:
+    if SPLIT_BY is SPLIT_BY_TRIAL:
         for train_index, test_index in cross_validation.StratifiedKFold(target, n_folds=CV_FOLDS, shuffle=True):
             yield train_index, test_index
-    if SPLIT_BY_USER:
+    if SPLIT_BY is SPLIT_BY_USER:
         all_pids = numpy.array(exp.get_all_participant_ids())
         for train_index, test_index in cross_validation.KFold(len(all_pids), n_folds=CV_FOLDS, shuffle=True):
             train_pid = all_pids[train_index]
